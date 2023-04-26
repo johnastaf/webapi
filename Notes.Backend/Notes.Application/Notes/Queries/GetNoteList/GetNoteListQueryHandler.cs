@@ -17,8 +17,7 @@ namespace Notes.Application.Notes.Queries.GetNoteList
         public GetNoteListQueryHandler(INotesDbContext dbContext, IMapper mapper) =>
             (_dbContext, _mapper) = (dbContext, mapper);
 
-        public async Task<NoteListVm> Handle(GetNoteListQuery request,
-            CancellationToken cancellationToken)
+        public async Task<NoteListVm> Handle(GetNoteListQuery request, CancellationToken cancellationToken)
         {
             var notesQuery = await _dbContext.Notes
                 .Where(note => note.UserId == request.UserId)

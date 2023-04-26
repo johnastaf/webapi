@@ -1,4 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
 using Notes.Application;
 using Notes.Application.Common.Mappings;
 using Notes.Application.Interfaces;

@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using Notes.Application.Common.Mappings;
 using Notes.Domain;
 using Notes.Application.Common.Mapping;
 
