@@ -2,6 +2,7 @@ using Notes.Application;
 using Notes.Application.Common.Mappings;
 using Notes.Application.Interfaces;
 using Notes.Persistence;
+using Notes.WebApi.Middleware;
 using System.Reflection;
 
 // Services
@@ -44,6 +45,7 @@ catch (Exception exception)
     Console.WriteLine(exception.Message);
 }
 
+app.UseCustomExceptionHandler();
 app.UseRouting();
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
