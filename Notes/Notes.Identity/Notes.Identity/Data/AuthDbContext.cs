@@ -9,7 +9,7 @@ namespace Notes.Identity.Data
     {
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options) 
         {
-            Database.EnsureDeleted();
+           // Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

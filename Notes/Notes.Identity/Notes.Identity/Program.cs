@@ -45,22 +45,6 @@ builder.Services.AddControllersWithViews();
 // Configure
 var app = builder.Build();
 
-try
-{
-    Console.WriteLine("Connect to db...");
-    var scope = app.Services.CreateScope();
-    var context = scope.ServiceProvider.GetRequiredService<AuthDbContext>();
-
-    Console.WriteLine("Connection complete: " + context.Database.CanConnect());
-   // DbInitializer.Initialize(context);
-}
-catch (Exception exception)
-{
-    var logger = app.Services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(exception, "An error occurred while app initialization");
-}
-
-
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "Styles")),
