@@ -3,6 +3,7 @@ using Notes.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Notes.Identity.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +40,7 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.LogoutPath = "/Auth/Logout";
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
 
 // Configure
 var app = builder.Build();
@@ -56,6 +57,12 @@ catch (Exception exception)
     logger.LogError(exception, "An error occurred while app initialization");
 }
 
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "Styles")),
+    RequestPath = "/styles"
+});
 app.UseRouting();
 app.UseIdentityServer();
 app.UseEndpoints(endpoints =>
