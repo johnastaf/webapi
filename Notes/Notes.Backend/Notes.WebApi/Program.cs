@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Notes.Application;
 using Notes.Application.Common.Mappings;
 using Notes.Application.Interfaces;
@@ -29,7 +30,17 @@ builder.Services.AddCors(options =>
     });
 });
 
-
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:44386/";
+        options.Audience = "NotesWebAPI";
+        options.RequireHttpsMetadata = false;
+    });
 
 // Configure
 var app = builder.Build();
@@ -49,7 +60,8 @@ app.UseCustomExceptionHandler();
 app.UseRouting();
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
-
+app.UseAuthentication();
+app.UseAuthentication();
 app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.Run();
