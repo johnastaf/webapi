@@ -42,6 +42,8 @@ builder.Services.AddAuthentication(config =>
         options.RequireHttpsMetadata = false;
     });
 
+builder.Services.AddSwaggerGen();
+
 // Configure
 var app = builder.Build();
 
@@ -56,6 +58,8 @@ catch (Exception exception)
     Console.WriteLine(exception.Message);
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseCustomExceptionHandler();
 app.UseRouting();
 app.UseHttpsRedirection();
